@@ -5,15 +5,24 @@ import CountryRoutes from "./Components/CountryRoutes";
 import { BrowserRouter } from "react-router-dom";
 
 interface Country {
+  code: string;
   name: {
     common: string;
+    official: string;
   };
   flags: {
     svg: string;
   };
   population: number;
   region: string;
+  subregion: string;
   capital: string;
+  tld: string[];
+  currencies: { [key: string]: string }[];
+  languages: {
+    [key: string]: string;
+  }[];
+  borders: string[];
 }
 
 function App() {
@@ -37,12 +46,11 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className={`${Active ? "bg-[#202C36]" : ""}`}>
+      <div className={`${Active ? "bg-[#202C36]" : ""} h-full`}>
         <Header Active={Active} setActive={setActive} />
         <CountryRoutes
           Active={Active}
           countries={countries}
-          filteredCountries={[]}
           searchValue={searchValue}
           selectedRegion={selectedRegion}
           onSearch={setSearchValue}
@@ -52,5 +60,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;
